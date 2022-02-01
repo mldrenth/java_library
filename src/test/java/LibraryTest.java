@@ -9,6 +9,7 @@ public class LibraryTest {
     private Book book1;
     private Book book2;
     private Book book3;
+    private Borrower borrower;
 
     @Before
     public void before(){
@@ -16,6 +17,7 @@ public class LibraryTest {
         book1 = new Book("Lord of the Rings", "JRR Tolkien", "Fantasy");
         book2 = new Book("Harry Potter", "JK Rowling", "Fantasy");
         book3 = new Book("It", "Stephen King", "Horror");
+        borrower = new Borrower();
     }
 
     @Test
@@ -47,6 +49,23 @@ public class LibraryTest {
         library.addBook(book1);
         library.removeBook(book1);
         assertEquals(0, library.getBookCount());
+    }
+
+    @Test
+    public void has2FantasyBooks(){
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        assertEquals(2, library.getAmountPerGenre("Fantasy"));
+    }
+
+    @Test
+    public void borrowingBookWillReduceEntry(){
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        borrower.borrow(library, book1);
+        assertEquals(1, library.getAmountPerGenre("Fantasy"));
     }
 
 }
