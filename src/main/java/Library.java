@@ -25,4 +25,9 @@ public class Library {
     public boolean hasSpace(){
         return this.capacity > this.listOfBooks.size();
     }
+
+    public Book removeBook(Book book) {
+        int indexToRemove = listOfBooks.indexOf(book);
+        return listOfBooks.remove(indexToRemove);
+    }
 }
